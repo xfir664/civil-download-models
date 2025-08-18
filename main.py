@@ -108,8 +108,6 @@ for url in URLS:
 
 if ERRORS_LIST:
     for error in ERRORS_LIST:
-        print(f"❌ {error['error_message']}")
-        print(f"❌ {error['error_data']}")
-        print(f"❌ {error['error_type']}")
+        print(error)
 else:
     print("✅ Ошибок нет")
