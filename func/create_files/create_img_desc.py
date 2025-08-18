@@ -8,7 +8,7 @@ def create_img_desc(img_path, img_description, index = 0):
     try:
         data_list = img_description.find_element(By.XPATH, ".//ul[contains(@class, 'flex list-none flex-col')]")
         data_list_items = data_list.find_elements(By.XPATH, ".//li[contains(@class, 'flex flex-col')]")
-        if len(data_list_items) > 3:
+        if len(data_list_items) >= 3:
             list_show_more_btn = img_description.find_element(By.XPATH, ".//div[contains(@class, 'flex flex-col')]//div[contains(@class, 'flex justify-start')]//p[contains(@class, 'mantine-focus-auto cursor-pointer')]")
             list_show_more_btn.click()
     except Exception as e:
@@ -32,10 +32,9 @@ def create_img_desc(img_path, img_description, index = 0):
     
     try:
         if not os.path.isfile(os.path.join(img_path, f"img-{index}.txt")):
-            description_text = img_description.find_elements(By.XPATH, ".//*")
+            description_text = img_description.text + "\n"
             description_text_output = []
-            for elem in description_text:
-                description_text_output.append(elem.text.strip())
+            description_text_output.append(description_text)
 
             img_description_links = img_description.find_elements(By.TAG_NAME, "a")
             img_description_links_output = []
@@ -43,12 +42,12 @@ def create_img_desc(img_path, img_description, index = 0):
                 img_href = link.get_attribute("href")
                 img_text = link.text.strip()
                 if img_href and img_text:
-                    img_description_links_output.append(f"{img_href} - {img_text}")
+                    img_description_links_output.append(f"{img_href} - {img_text} + \n")
                 elif img_href:
                     img_description_links_output.append(img_href)
-
+    
             with open(os.path.join(img_path, f"img-{index}.txt"), "w", encoding="utf-8") as f:
-                f.write("\n".join(img_description_links_output) + "\n" + "\n".join(description_text_output))
+                f.write("\n".join(img_description_links_output) + "\n" + description_text)
             print(f"✅ Image description file created: {os.path.join(img_path, f'img-{index}.txt')}")
         else:
             print(f"⚠️ Skipped: {os.path.join(img_path, f'img-{index}.txt')} already exists")

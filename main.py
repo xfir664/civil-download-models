@@ -17,7 +17,9 @@ import os
 import time
 
 URLS = [
-    "https://civitai.com/models/1259610/ugly-bastard-faceless-ugly-man-concept?modelVersionId=1420308",
+    "https://civitai.com/models/1439943/upright-straddle-concept?modelVersionId=1627740",
+
+
 ];
 
 
