@@ -1,0 +1,9 @@
+downloads
+txt
+
+chrome-win64
+chromedriver-win64
+
+__pycache__
+
+**/__pycache__
