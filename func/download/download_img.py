@@ -5,6 +5,7 @@ from func.wait_page_loaded import wait_page_loaded
 from func.find_elems.find_pagination_btns import find_pagination_btns
 from func.download.download_page_img import download_page_img
 from func.create_files.create_img_desc import create_img_desc
+from func.click_close_btn import click_close_btn
 from selenium.webdriver.common.by import By
 import time
 
@@ -26,6 +27,8 @@ def download_img(driver, pagintaion_path, download_path, img_path):
         else:
             create_img_desc(img_path, img_description, 0)
             download_page_img(img_path, driver, 0)
+            
+        click_close_btn(driver)
 
 
     except Exception as e:

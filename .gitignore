@@ -7,3 +7,7 @@ chromedriver-win64
 __pycache__
 
 **/__pycache__
+
+.venv/
+__pycache__/
+*.pyc

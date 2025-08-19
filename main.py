@@ -1,5 +1,5 @@
 from func.check_url import check_url
-from func.set_new_error import ERRORS as ERRORS_LIST
+from func.set_new_error import ERRORS as ERRORS_LIST, set_new_error
 from func.sanitize_windows_path import sanitize_windows_path
 from setup_driver import setup_driver
 from func.wait_page_loaded import wait_page_loaded
@@ -17,8 +17,7 @@ import os
 import time
 
 URLS = [
-    "https://civitai.com/models/1439943/upright-straddle-concept?modelVersionId=1627740",
-
+        "https://civitai.com/models/551389/self-breast-sucking-concept?modelVersionId=613550",
 
 ];
 
@@ -48,6 +47,7 @@ elems = {
 }
 
 def init(url):
+    set_new_error(f'{url}')
     driver = setup_driver()
     check_url(driver, url)
     version_div = find_version_div(driver, elems["version_container"])
@@ -66,8 +66,15 @@ def init(url):
         title, description_div, download_btn, img, details_div, details_type, details_base_model = find_all_elems_on_url_page(driver, elems)
 
         description_show_more = find_description_show_more(driver, elems["show_more_btn"])
-        description_show_more.click()
-        time.sleep(3)
+        try:
+            if not description_show_more.get_attribute("aria-expanded") == "true":
+                description_show_more.click()
+                time.sleep(3)
+        except Exception as e:
+            set_new_error({
+                "error_message": f"⚠️ Ошибка при раскрытии описания:",
+                "error_type": "find_description_show_more",
+            })
 
         download_path = os.path.join(
             "downloads",
@@ -99,6 +106,8 @@ def init(url):
         wait_page_loaded(driver)
 
         download_img(driver, elems["pagination_btns"], download_path, img_path)
+        
+    driver.quit()
 
 
 

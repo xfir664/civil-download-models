@@ -22,7 +22,9 @@ def create_img_desc(img_path, img_description, index = 0):
 
         for prompt in prompts_container:
             if prompt.get_attribute("data-line-clamp") == "true":
-                prompt.find_element(By.XPATH, ".//span[contains(@class, 'absolute') and contains(@class, 'bottom-0') and contains(@class, 'right-0') and contains(@class, 'flex') and contains(@class, 'select-none') and contains(@class, 'items-end')]").click()
+                sm_btn = prompt.find_element(By.XPATH, ".//span[contains(@class, 'absolute') and contains(@class, 'bottom-0') and contains(@class, 'right-0') and contains(@class, 'flex') and contains(@class, 'select-none') and contains(@class, 'items-end')]")
+                if not sm_btn.text == "Show less":
+                    sm_btn.click()
     except Exception as e:
         set_new_error({
             "error_message": f"⚠️ Ошибка при раскрытии списка:",
