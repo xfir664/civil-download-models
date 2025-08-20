@@ -9,7 +9,6 @@ def create_details_file(path, elem):
             details_text = elem.text + "\n"
             with open(path, "w", encoding="utf-8") as f:
                 f.write(details_text)
-            print(f"✅ Details file created: {path}")
         else:
             print(f"⚠️ Skipped: {path} already exists")
     except Exception as e:

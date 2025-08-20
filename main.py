@@ -34,13 +34,70 @@ elems = {
     "pagination_btns": ".//button[contains(@class, 'mantine-focus-auto h-1 max-w-6 flex-1 rounded border border-solid border-gray-4 bg-white shadow-2xl') and contains(@class, 'mantine-UnstyledButton-root')]",
 }
 
-CITE_URL = "https://civitai.com/models/1467600/presenting-removed-panties-concept?modelVersionId=1659859"
+CITE_URL = [
+
+"https://civitai.com/models/962877/dio-brandos-pose-poses?modelVersionId=1078027",
+"https://civitai.com/models/926242/soap-censor-concept?modelVersionId=1036773",
+"https://civitai.com/models/1018425/incoming-gift-concept?modelVersionId=1141913",
+"https://civitai.com/models/1035803/christmas-sweater-clothing?modelVersionId=1161798",
+"https://civitai.com/models/1064533/kneeling-upright-sex-from-behind-concept?modelVersionId=1194714",
+"https://civitai.com/models/1122064/penis-on-shoulder-concept?modelVersionId=1261116",
+"https://civitai.com/models/558342/rin-kagamine-cosplay-clothing?modelVersionId=621541",
+"https://civitai.com/models/589523/cum-pool-concept?modelVersionId=658223",
+"https://civitai.com/models/1199250/parfait-concept?modelVersionId=1350397",
+"https://civitai.com/models/1122062/erection-under-clothes-concept?modelVersionId=1261114",
+"https://civitai.com/models/585411/polka-dot-panties-clothing?modelVersionId=653249",
+"https://civitai.com/models/778914/negligee-clothing?modelVersionId=871125",
+"https://civitai.com/models/828914/x-fingers-concept?modelVersionId=927055",
+"https://civitai.com/models/544706/tutu-clothing?modelVersionId=605755",
+"https://civitai.com/models/1155298/mating-press-from-above-concept?modelVersionId=1299338",
+"https://civitai.com/models/564628/surprise-kiss-concept-commission?modelVersionId=629253",
+"https://civitai.com/models/555700/lum-cosplay-clothing?modelVersionId=618473",
+"https://civitai.com/models/566162/fellatio-under-mask-concept?modelVersionId=630997",
+"https://civitai.com/models/551167/bubble-tea-challenge-concept?modelVersionId=613305",
+"https://civitai.com/models/551269/naked-chocolate-clothing?modelVersionId=613413",
+"https://civitai.com/models/551328/penis-to-breast-concept?modelVersionId=613481",
+"https://civitai.com/models/566164/opening-door-concept?modelVersionId=630999",
+"https://civitai.com/models/545251/undone-sarashi-clothing?modelVersionId=606366",
+"https://civitai.com/models/923565/lactation-from-behind-concept?modelVersionId=1033791",
+"https://civitai.com/models/583498/bikini-pull-clothing?modelVersionId=650989",
+"https://civitai.com/models/545258/undressing-concept?modelVersionId=606376",
+"https://civitai.com/models/1155653/terrified-noot-noot-concept?modelVersionId=1299726",
+"https://civitai.com/models/547666/reverse-upright-straddle-reverse-cowgirl-position-concept?modelVersionId=609174",
+"https://civitai.com/models/585214/dimples-of-venus-concept?modelVersionId=653024",
+"https://civitai.com/models/585215/dolphin-shorts-clothing?modelVersionId=653025",
+"https://civitai.com/models/566160/fellatio-gesture-poses?modelVersionId=630995",
+"https://civitai.com/models/843414/clown-clothing?modelVersionId=943559",
+"https://civitai.com/models/1138462/snake-wrapped-around-body-concept?modelVersionId=1280272",
+"https://civitai.com/models/566037/sitting-on-face-concept?modelVersionId=630853",
+"https://civitai.com/models/631420/letterman-jacket-clothing?modelVersionId=705875",
+"https://civitai.com/models/1376134/shushing-concept?modelVersionId=1554909",
+"https://civitai.com/models/1365557/grabbed-breast-over-shoulder-concept?modelVersionId=1542758",
+"https://civitai.com/models/1343951/reaching-overhead-concept?modelVersionId=1517785",
+"https://civitai.com/models/1392517/bunny-ears-prank-concept?modelVersionId=1573925",
+"https://civitai.com/models/929497/aesthetic-quality-modifiers-masterpiece?modelVersionId=1050644",
+"https://civitai.com/models/1805497/glory-wall-concept",
+"https://civitai.com/models/1715234/dripping-pussy-juice-from-behind-concept-commission",
+"https://civitai.com/models/1256683/disney-animation-illustrious-and-pony?modelVersionId=1416874",
+"https://civitai.com/models/661736/s1-dramatic-lighting?modelVersionId=1280045",
+"https://civitai.com/models/1059581/incase-gothic-style-mix-or-illustrious?modelVersionId=1189052",
+"https://civitai.com/models/1513554/eugene-delacroix-artist-style-illustrious?modelVersionId=1712254",
+"https://civitai.com/models/242753/ak-74-by-ct0kk",
+"https://civitai.com/models/1566731/draco-ak-pistol-illustrious",
+"https://civitai.com/models/1292899/ak-74m-illustrious",
+"https://civitai.com/models/1221363/untitled-goose-game-style-illustrious?modelVersionId=1396727",
+"https://civitai.com/models/405747/fernando-style-pdxlilxl-or-experimental?modelVersionId=1271352",
+"https://civitai.com/models/1514485/ice-immigration-and-customs-enforcement-plate-carrier-with-triple-magazine-placard-loaded-with-magpul-pmags-illustrious?modelVersionId=1713324",
+"https://civitai.com/models/1475989/krysdeckerstylev3?modelVersionId=1669481",
+"https://civitai.com/models/1494933/lunafreya-nox-fleuret-illustrious?modelVersionId=1691193",
+]
 
 
 
 def init(url):
     driver = setup_driver()
     check_url(driver, url)
+    set_new_error(url)
 
 
     version_div = find_version_div(driver, elems["version_container"])
@@ -87,10 +144,12 @@ def init(url):
         
     driver.quit()
 
-init(CITE_URL)
+for url in CITE_URL:
+    init(url)
+
+
 
 if ERRORS_LIST:
-    print(f"❌ Ошибки: {CITE_URL}")
     for error in ERRORS_LIST:
         print(f"❌ Ошибки: {error}")
 

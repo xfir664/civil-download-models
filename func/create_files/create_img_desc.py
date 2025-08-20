@@ -72,8 +72,7 @@ def create_img_desc(img_path, img_description, index = 0):
             complite_img_links = "\n".join(img_description_links_output)
     
             with open(os.path.join(img_path, f"img-{index}.txt"), "w", encoding="utf-8") as f:
-                f.write(complite_img_links + '\n' + prompt_text)
-            print(f"✅ Image description file created: {os.path.join(img_path, f'img-{index}.txt')}")
+                f.write(complite_img_links + '\n' + prompt_text + '\n' + img_description.text)
         else:
             print(f"⚠️ Skipped: {os.path.join(img_path, f'img-{index}.txt')} already exists")
     except Exception as e:

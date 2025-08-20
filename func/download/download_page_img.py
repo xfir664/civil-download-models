@@ -43,7 +43,6 @@ def download_page_img(img_path, driver, index = 0):
             for chunk in response.iter_content(chunk_size=8192):
                 f.write(chunk)
 
-        print(f"✅ Изображение успешно скачано: {file_path}")
         return True
 
     except Exception as e:
