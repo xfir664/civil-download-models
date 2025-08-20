@@ -3,6 +3,7 @@ txt
 
 chrome-win64
 chromedriver-win64
+chrome
 
 __pycache__
 

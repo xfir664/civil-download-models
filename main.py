@@ -16,10 +16,6 @@ from selenium.webdriver.common.action_chains import ActionChains
 import os
 import time
 
-URLS = [
-        "https://civitai.com/models/551389/self-breast-sucking-concept?modelVersionId=613550",
-
-];
 
 
 elems = {
@@ -45,6 +41,9 @@ elems = {
 
     "pagination_btns": ".//button[contains(@class, 'mantine-focus-auto h-1 max-w-6 flex-1 rounded border border-solid border-gray-4 bg-white shadow-2xl') and contains(@class, 'mantine-UnstyledButton-root')]",
 }
+
+CITE_URL = "https://civitai.com/models/1467600/presenting-removed-panties-concept?modelVersionId=1659859"
+
 
 def init(url):
     set_new_error(f'{url}')
@@ -109,16 +108,4 @@ def init(url):
         
     driver.quit()
 
-
-
-
-
-        
-for url in URLS:
-    init(url)
-
-if ERRORS_LIST:
-    for error in ERRORS_LIST:
-        print(error)
-else:
-    print("✅ Ошибок нет")
+init(CITE_URL)

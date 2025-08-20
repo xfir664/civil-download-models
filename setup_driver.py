@@ -5,10 +5,10 @@ from selenium.webdriver.chrome.options import Options
 import os
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-print(BASE_DIR)
-CHROME_BINARY_PATH = os.path.join(BASE_DIR, "chrome-win64", "chrome.exe")
-CHROMEDRIVER_PATH = os.path.join(BASE_DIR, "chromedriver-win64", "chromedriver.exe")
-CHROME_USER_DATA_DIR = r"C:\Users\3\AppData\Local\Google\Chrome for Testing\User Data"  # Чистая папка
+
+CHROME_BINARY_PATH = os.path.join(BASE_DIR, "chrome", "chrome.exe")
+CHROMEDRIVER_PATH = os.path.join(BASE_DIR, "chrome", "chromedriver.exe")
+CHROME_USER_DATA_DIR = os.path.join(BASE_DIR, "chrome", "User Data")
 PROFILE_DIRECTORY = "Default"
 
 assert os.path.isfile(CHROME_BINARY_PATH), f"Chrome не найден: {CHROME_BINARY_PATH}"
