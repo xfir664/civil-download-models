@@ -6,10 +6,11 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-CHROME_BINARY_PATH = os.path.join(BASE_DIR, "chrome", "chrome.exe")
-CHROMEDRIVER_PATH = os.path.join(BASE_DIR, "chrome", "chromedriver.exe")
-CHROME_USER_DATA_DIR = os.path.join(BASE_DIR, "chrome", "User Data")
+CHROME_BINARY_PATH = os.path.join(BASE_DIR, "chrome", "chrome-win64", "chrome.exe")
+CHROMEDRIVER_PATH = os.path.join(BASE_DIR, "chrome", "chromedriver-win64", "chromedriver.exe")
+CHROME_USER_DATA_DIR = os.path.join(BASE_DIR, "chrome", "proff")
 PROFILE_DIRECTORY = "Default"
+
 
 assert os.path.isfile(CHROME_BINARY_PATH), f"Chrome не найден: {CHROME_BINARY_PATH}"
 assert os.path.isfile(CHROMEDRIVER_PATH), f"Chromedriver не найден: {CHROMEDRIVER_PATH}"

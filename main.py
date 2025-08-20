@@ -6,17 +6,13 @@ from func.wait_page_loaded import wait_page_loaded
 from func.find_elems.find_version_div import find_version_div
 from func.find_elems.find_version_btns import find_version_btns
 from func.find_all_elems_on_url_page import find_all_elems_on_url_page
-from func.find_elems.find_description_show_more import find_description_show_more
-from func.create_files.create_description_file import create_description_file
 from func.create_files.create_details_file import create_details_file
-from func.create_files.create_description_links import create_description_links
 from func.download.download_model import download_model
 from func.download.download_img import download_img
+from func.create_files.create_img_desc import create_img_desc
 from selenium.webdriver.common.action_chains import ActionChains
 import os
-import time
-
-
+from selenium.webdriver.common.by import By
 
 elems = {
     "title": "//h1[contains(@class, 'mantine-Title-root')]",
@@ -24,8 +20,6 @@ elems = {
     "version_container": "//div[contains(@class, 'mantine-Group-root') and contains(@style, '--group-justify: flex-start')]",
 
     "version_btns": "//button[contains(@class, 'mantine-Button-root') and @data-variant='filled' and @data-size='compact-sm']",
-
-    "description_container": "//div[contains(@class, 'mantine-TypographyStylesProvider-root')]",
 
     "details_container": "//div[contains(@class, 'mantine-Accordion-item') and @data-active='true']",
 
@@ -37,18 +31,18 @@ elems = {
 
     "details_base_model": ".//p[normalize-space()='Base Model']/ancestor::tr//td[2]//p[not(ancestor::a)]",
 
-    "show_more_btn": ".//button[contains(@class, 'mantine-focus-auto') and contains(@class, 'mantine-Anchor-root')]",
-
     "pagination_btns": ".//button[contains(@class, 'mantine-focus-auto h-1 max-w-6 flex-1 rounded border border-solid border-gray-4 bg-white shadow-2xl') and contains(@class, 'mantine-UnstyledButton-root')]",
 }
 
 CITE_URL = "https://civitai.com/models/1467600/presenting-removed-panties-concept?modelVersionId=1659859"
 
 
+
 def init(url):
-    set_new_error(f'{url}')
     driver = setup_driver()
     check_url(driver, url)
+
+
     version_div = find_version_div(driver, elems["version_container"])
     version_btns = find_version_btns(version_div, elems["version_btns"])
     for btn_index in range(len(version_btns)):
@@ -62,18 +56,7 @@ def init(url):
         ActionChains(driver).move_to_element(new_version_btns[btn_index]).click().perform()
         wait_page_loaded(driver)
 
-        title, description_div, download_btn, img, details_div, details_type, details_base_model = find_all_elems_on_url_page(driver, elems)
-
-        description_show_more = find_description_show_more(driver, elems["show_more_btn"])
-        try:
-            if not description_show_more.get_attribute("aria-expanded") == "true":
-                description_show_more.click()
-                time.sleep(3)
-        except Exception as e:
-            set_new_error({
-                "error_message": f"⚠️ Ошибка при раскрытии описания:",
-                "error_type": "find_description_show_more",
-            })
+        title, download_btn, img, details_div, details_type, details_base_model = find_all_elems_on_url_page(driver, elems)
 
         download_path = os.path.join(
             "downloads",
@@ -86,16 +69,12 @@ def init(url):
 
         img_path = os.path.join(download_path, "images")
 
-        desc_file_path = os.path.join(download_path, "description.txt")
         details_file_path = os.path.join(download_path, "details.txt")
-        desc_links_file_path = os.path.join(download_path, "description_links.txt")
 
         os.makedirs(download_path, exist_ok=True)
         os.makedirs(img_path, exist_ok=True)
 
-        create_description_file(desc_file_path, description_div)
         create_details_file(details_file_path, details_div)
-        create_description_links(desc_links_file_path, description_div)
 
         download_model(driver, download_btn, download_path)
 
@@ -104,8 +83,14 @@ def init(url):
         img.click()
         wait_page_loaded(driver)
 
-        download_img(driver, elems["pagination_btns"], download_path, img_path)
+        download_img(driver, elems["pagination_btns"], img_path)
         
     driver.quit()
 
 init(CITE_URL)
+
+if ERRORS_LIST:
+    print(f"❌ Ошибки: {CITE_URL}")
+    for error in ERRORS_LIST:
+        print(f"❌ Ошибки: {error}")
+

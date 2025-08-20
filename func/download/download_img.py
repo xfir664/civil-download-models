@@ -10,7 +10,7 @@ from selenium.webdriver.common.by import By
 import time
 
 
-def download_img(driver, pagintaion_path, download_path, img_path):
+def download_img(driver, pagintaion_path, img_path):
     try:
         wait_page_loaded(driver)
         img_description = driver.find_element(By.XPATH, ".//div[contains(@class, 'flex flex-col gap-3') and contains(@class, 'mantine-Paper-root')]")
